@@ -1,13 +1,16 @@
 const add = (stringNumbers) => {
-    const numbers = stringNumbers
-      .replace(/(\n)/gm, ',') 
-      .split(',')                     
-      .map(n => parseInt(n, 10)) 
+  const numbers = stringNumbers
+    .replace(/(\n)/gm, ',') 
+    .split(',')                     
+    .map(n => parseInt(n, 10)) 
 
-    if(numbers.some(number => isNaN(number))) return 0;   
-    if(numbers.some(number => number < 0)) throw new Error('negatives not allowed')
-    
-    return numbers.reduce((a, b) => a + b)
+  return numbers.reduce((acc, num) => {
+    if (num < 0) {
+      throw new Error('negatives not allowed');
+    }
+
+    return acc + (num <= 1000 ? num : 0);
+  }, 0);
 }
 
 module.exports = add;
