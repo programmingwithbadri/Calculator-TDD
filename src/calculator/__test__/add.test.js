@@ -15,8 +15,10 @@ describe("Add numbers",  function(){
     
     it("should return the sum of an unknown amount of numbers", function(){
       const unknownAmountOfNumbers = Math.floor((Math.random() * 100));
-      const numbersArray = Array(unknownAmountOfNumbers).fill().map(() => Math.round(Math.random() * unknownAmountOfNumbers))
-     
+      const numbersArray = Array(unknownAmountOfNumbers).fill().map(
+        () => Math.round(Math.random() * unknownAmountOfNumbers)
+      );
+           
       const sumOfTheArray = numbersArray.reduce((a, b) => a + b, 0);
 
       const unknownAmountOfNumbersArg= numbersArray.join();
@@ -24,7 +26,7 @@ describe("Add numbers",  function(){
     });
     
     it("should not allow negative numbers to be passed as arguments", () => {
-      expect(add("-1,2")).toThrow(new Error("negatives not allowed"));
+      expect(() => add("-1,2")).toThrow(new Error("negatives not allowed"));
     });
 
     it("should allow \\n in between the input number string", () => {
