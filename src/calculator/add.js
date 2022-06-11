@@ -1,15 +1,13 @@
-const add = (numbers) => {
-    if (numbers.includes('-')) {
-        throw new Error('negatives not allowed');
-    }
-    if(!numbers) {
-        return 0;
-    } else if(numbers.length === 1) { 
-        return (Number(numbers));
-    } else {
-        const numbersToAdd = numbers.split(',');
-        return numbersToAdd.reduce((a, b) => Number(a)+ Number(b), 0);  
-    }
+const add = (stringNumbers) => {
+    const numbers = stringNumbers
+      .replace(/(\n)/gm, ',') 
+      .split(',')                     
+      .map(n => parseInt(n, 10)) 
+
+    if(numbers.some(number => isNaN(number))) return 0;   
+    if(numbers.some(number => number < 0)) throw new Error('negatives not allowed')
+    
+    return numbers.reduce((a, b) => a + b)
 }
 
 module.exports = add;
